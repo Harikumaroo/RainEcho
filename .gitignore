@@ -1,0 +1,13 @@
+# Ignore Python and node virtual envs, env files, and build artifacts
+.venv/
+backend/.venv/
+frontend/node_modules/
+dist/
+frontend/dist/
+backend/staticfiles/
+.env
+backend/.env
+frontend/.env
+__pycache__/
+*.pyc
+.DS_Store
