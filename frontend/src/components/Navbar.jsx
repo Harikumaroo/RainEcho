@@ -9,15 +9,17 @@ export default function Navbar() {
 
   return (
     <header className="site-nav relative z-50">
-      <div className="brand flex justify-between items-center w-full md:w-auto">
-        <div>
+      <div className="flex w-full md:w-auto justify-between items-center flex-row-reverse md:flex-row">
+        
+        <div className="brand text-right md:text-left">
           <Link to="/" className="brand-logo">
             RainEcho
           </Link>
           <p className="brand-tagline">Weather clarity for every journey.</p>
         </div>
+
         <button 
-          className="md:hidden text-white text-2xl p-2 focus:outline-none" 
+          className="md:hidden text-white text-2xl p-2 -ml-2 focus:outline-none" 
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <FiX /> : <FiMenu />}
