@@ -21,7 +21,25 @@ export default function Register() {
       await register({ username, email, password })
       navigate('/')
     } catch (err) {
-      setError(err?.response?.data?.detail || 'Registration failed. Try again.')
+      const data = err?.response?.data
+      let errorMessage = 'Registration failed. Try again.'
+      
+      if (data) {
+        if (data.detail) {
+          errorMessage = data.detail
+        } else {
+          const firstKey = Object.keys(data)[0]
+          if (firstKey && Array.isArray(data[firstKey])) {
+            errorMessage = data[firstKey][0]
+          } else if (typeof data === 'string') {
+            errorMessage = data
+          }
+        }
+      } else if (err?.message) {
+        errorMessage = `Network Error: Backend server might be down (${err.message})`
+      }
+      
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }

@@ -20,7 +20,25 @@ export default function Login() {
       await login({ username, password })
       navigate('/')
     } catch (err) {
-      setError(err?.response?.data?.detail || 'Login failed. Check your credentials.')
+      const data = err?.response?.data
+      let errorMessage = 'Login failed. Check your credentials.'
+      
+      if (data) {
+        if (data.detail) {
+          errorMessage = data.detail
+        } else {
+          const firstKey = Object.keys(data)[0]
+          if (firstKey && Array.isArray(data[firstKey])) {
+            errorMessage = data[firstKey][0]
+          } else if (typeof data === 'string') {
+            errorMessage = data
+          }
+        }
+      } else if (err?.message) {
+        errorMessage = `Network Error: Backend server might be down (${err.message})`
+      }
+      
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }
