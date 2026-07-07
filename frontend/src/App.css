@@ -294,7 +294,6 @@
 }
 
 .nav-links {
-  display: flex;
   align-items: center;
   gap: 18px;
   flex-wrap: wrap;
@@ -317,7 +316,6 @@
 }
 
 .nav-actions {
-  display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
